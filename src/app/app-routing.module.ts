@@ -13,18 +13,22 @@ import {
 } from "@angular/material";
 
 import { BaseComponent } from "./components/base/base.component";
-import { WheeloflifeComponent } from "./components/wheeloflife/wheeloflife.component";
-import { GraphService } from "./components/wheeloflife/graph.service";
 
 const routes: Routes = [
   { path: '', component: BaseComponent },
-  { path: 'wheeloflife', component: WheeloflifeComponent }
-];
+  {
+    path: 'exercise',
+    loadChildren: 'app/exercise/exercise.module#ExerciseModule'
+  },
+  {
+    path: 'resource',
+    loadChildren: 'app/resources/resources.module#ResourcesModule'
+  }
+]
 
 @NgModule({
   declarations: [
-    BaseComponent,
-    WheeloflifeComponent
+    BaseComponent
   ],
   imports: [ 
     CommonModule,
@@ -38,9 +42,6 @@ const routes: Routes = [
     MatButtonModule,
     MatIconModule
   ],
-  exports: [ RouterModule ],
-  providers: [
-    GraphService
-  ]
+  exports: [ RouterModule ]
 })
 export class AppRoutingModule { }

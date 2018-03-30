@@ -1,0 +1,81 @@
+<!-- <mat-horizontal-stepper [linear]="true" #stepper="matHorizontalStepper">
+  <mat-step>
+    <form>
+      <ng-template matStepLabel>Fill out current data</ng-template>
+      <div *ngFor="let spoke of data[0];let i = index">
+        <mat-form-field>
+          <input matInput placeholder="Spoke" [(ngModel)]="spoke.axis" required name="axis{{i}}">
+        </mat-form-field>
+        <mat-form-field>
+          <input type="number" matInput placeholder="Value" [(ngModel)]="spoke.value" required name="value{{i}}" min="0" max="10">
+        </mat-form-field>
+        <button mat-icon-button (click)="removeSpoke(data[0],i)" [disabled]="data[0].length===1"><mat-icon><i class="material-icons">remove_circle_outline</i></mat-icon></button>
+        <button mat-icon-button (click)="addSpoke(data[0])"><mat-icon><i class="material-icons">add_circle_outline</i></mat-icon></button>
+      </div>
+      <div>
+        <button mat-button matStepperNext (click)="phaseone()">Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <form>
+      <ng-template matStepLabel>This is your current whhel</ng-template>
+      <div class="radarChart1 w100 h100" style="min-height: 350px;" #radarChart1></div>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>After 3 months</ng-template>
+    <div *ngFor="let spoke of data[1];let i = index">
+      <mat-form-field>
+        <input matInput placeholder="Spoke" [(ngModel)]="spoke.axis" required name="axis{{i}}" disabled>
+      </mat-form-field>
+      <mat-form-field>
+        <input type="number" matInput placeholder="Value" [(ngModel)]="data[0][i].value" required name="value{{i}}" disabled>
+      </mat-form-field>
+      <mat-form-field>
+        <input type="number" matInput placeholder="Value" [(ngModel)]="spoke.value" required name="value{{i}}" min="0" max="10">
+      </mat-form-field>
+      <button mat-icon-button (click)="removeSpoke(data[1],i)" [disabled]="data[1].length===1"><mat-icon><i class="material-icons">remove_circle_outline</i></mat-icon></button>
+      <button mat-icon-button (click)="addSpoke(data[1])"><mat-icon><i class="material-icons">add_circle_outline</i></mat-icon></button>
+    </div>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button matStepperNext (click)="phasetwo()">Next</button>
+    </div>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>After 3 months Wheel</ng-template>
+    <div class="radarChart2 w100 h100" style="min-height: 350px;" #radarChart2></div>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper> -->
+<div class="w100 h100" fxLayout="row" fxLayoutAlign="center center">
+  <div class="h100">
+    <p>
+      <strong>FirstName</strong>, the exercise begins with understanding your building blocks. Your building blocks will form the spokes in your wheel of life.<br />
+      Once you're ready fill out your building blocks below. We recommended a minimum of 6 and maximum of 10.
+    </p>
+    <div>
+      <div *ngFor="let spoke of data[0];let i = index">
+        <mat-form-field>
+          <input matInput placeholder="Spoke" [(ngModel)]="spoke.axis" required name="axis{{i}}">
+        </mat-form-field>
+        <mat-form-field>
+          <input type="number" matInput placeholder="Value" [(ngModel)]="spoke.value" required name="value{{i}}" min="0" max="10">
+        </mat-form-field>
+        <button mat-icon-button (click)="removeSpoke(data[0],i)" [disabled]="data[0].length===1"><mat-icon><i class="material-icons">remove_circle_outline</i></mat-icon></button>
+        <button mat-icon-button (click)="addSpoke(data[0])"><mat-icon><i class="material-icons">add_circle_outline</i></mat-icon></button>
+      </div>
+    </div>
+  </div>
+  <div>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/PIJElPStJpg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+  </div>
+</div>

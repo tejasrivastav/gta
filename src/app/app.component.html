@@ -1,15 +1,29 @@
 <div fxLayout="column" class="h100">
     <mat-toolbar color="primary">
         <button mat-icon-button (click)="sidenav.toggle()"><i class="material-icons">menu</i></button>
-        <span>My Application</span>
+        <span>Great To Awesome</span>
     </mat-toolbar>
     <mat-sidenav-container fxLayout="row" fxFlex>
         <mat-sidenav #sidenav mode="{{mode}}" opened="{{opened}}" style="min-width: 250px;">
-            <mat-nav-list role="list">
-                <mat-list-item role="listitem" routerLink="/wheeloflife" >Wheel Of Life</mat-list-item>
-                <mat-list-item role="listitem">Item 2</mat-list-item>
-                <mat-list-item role="listitem">Item 3</mat-list-item>
-            </mat-nav-list>
+            <mat-accordion>
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        Exercise
+                    </mat-expansion-panel-header>
+                    <mat-nav-list role="list">
+                        <mat-list-item role="listitem" routerLink="/exercise/wheeloflife" >Wheel Of Life</mat-list-item>
+                        <mat-list-item role="listitem" routerLink="/exercise/journaling">journaling</mat-list-item>
+                    </mat-nav-list>
+                </mat-expansion-panel>
+                <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                            Resources
+                        </mat-expansion-panel-header>
+                        <mat-nav-list role="list">
+                            <mat-list-item role="listitem" routerLink="/resource/podcast" >Podcast</mat-list-item>
+                        </mat-nav-list>
+                    </mat-expansion-panel>
+            </mat-accordion>
         </mat-sidenav>
         <mat-sidenav-content fxFlex>
             <router-outlet></router-outlet>
