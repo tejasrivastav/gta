@@ -99,6 +99,9 @@
     <iframe class="w100" height="316px" src="https://www.youtube.com/embed/PIJElPStJpg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
   </div>
 </div>
+<div class="w100 h100" fxLayout="row" fxLayoutAlign="center start" *ngIf="currentState === 2">
+  <div class="radarChart1 w100 h100" style="min-height: 350px;" #radarChart1></div>
+</div>
 <div class="w100 h100" fxLayout="row" fxLayoutAlign="center start" *ngIf="currentState === 3">
   <div class="h100" FxFlex="55">
     <p>
@@ -116,4 +119,7 @@
   <div fxFlex="45">
     <iframe class="w100" height="316px" src="https://www.youtube.com/embed/PIJElPStJpg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
   </div>
+</div>
+<div class="w100 h100" fxLayout="row" fxLayoutAlign="center start" [hidden]="currentState !== 4">
+  <div class="radarChart2 w100 h100" style="min-height: 350px;" #radarChart2></div>
 </div>

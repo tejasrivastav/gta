@@ -21,9 +21,19 @@ export class LoginComponent implements OnInit {
   }
 
   login(user){
+    let self = this;
     this.authService.login(user)
     .then((data)=>{
       this.router.navigate(["exercise/wheeloflife"])
+    })
+    .catch((error)=>{
+      if(error.status === 401) {
+        this.authService.createAccount(user)
+        .toPromise()
+        .then((data)=>{
+          self.login(user);
+        })
+      }
     })
   }
 }
