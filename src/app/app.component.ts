@@ -9,7 +9,7 @@ import { MediaChange, ObservableMedia } from '@angular/flex-layout';
 export class AppComponent {
   activeMediaQuery;
   mode: String = "side";
-  opened: boolean = true;
+  opened: boolean = false;
   constructor(private media: ObservableMedia) { }
 
   ngOnInit() {
@@ -21,7 +21,7 @@ export class AppComponent {
         self.opened = false;
       } else {
         self.mode = "side";
-        self.opened = true;
+        self.opened = false;
       }
     });
   }

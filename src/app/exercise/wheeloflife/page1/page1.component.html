@@ -56,26 +56,64 @@
     </div>
   </mat-step>
 </mat-horizontal-stepper> -->
-<div class="w100 h100" fxLayout="row" fxLayoutAlign="center center">
-  <div class="h100">
+<div class="w100 h100" fxLayout="row" fxLayoutAlign="center start" *ngIf="currentState === 0">
+  <div class="h100" FxFlex="55">
     <p>
       <strong>FirstName</strong>, the exercise begins with understanding your building blocks. Your building blocks will form the spokes in your wheel of life.<br />
       Once you're ready fill out your building blocks below. We recommended a minimum of 6 and maximum of 10.
     </p>
     <div>
-      <div *ngFor="let spoke of data[0];let i = index">
-        <mat-form-field>
-          <input matInput placeholder="Spoke" [(ngModel)]="spoke.axis" required name="axis{{i}}">
+      <form name="buildingBlock">
+        <div *ngFor="let block of wof.blocks;let idx = index">
+          <mat-form-field>
+            <input matInput placeholder="Building block" [ngModel]="block" (change)="textUpdated($event,idx)" required name="block-{{idx}}">
+          </mat-form-field>
+          <button mat-icon-button (click)="wof.blocks.splice(idx,1)" [disabled]="wof.blocks.length===1"><mat-icon><i class="material-icons">remove_circle_outline</i></mat-icon></button>
+          <button mat-icon-button (click)="wof.blocks.push('')"><mat-icon><i class="material-icons">add_circle_outline</i></mat-icon></button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div fxFlex="45">
+    <iframe class="w100" height="316px" src="https://www.youtube.com/embed/PIJElPStJpg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+  </div>
+</div>
+<div>
+  <button mat-raised-button (click)="save()" [disabled]="wof.blocks.length===1">Save</button>
+</div>
+<div class="w100 h100" fxLayout="row" fxLayoutAlign="center start" *ngIf="currentState === 1">
+  <div class="h100" FxFlex="55">
+    <p>
+      It's now time to score each of your blocks on a scale of 1-10. For each block, ask yourself the question:  “How satisfied am I in this particular area currently”?
+    </p>
+    <div>
+      <div *ngFor="let block of wof.blocks;let i = index" fxLayout="row" fxLayoutAlign="center start">
+        <span fxFlex="65">{{block}}</span>
+        <mat-form-field fxFlex>
+          <input type="number" matInput placeholder="Value" [(ngModel)]="wof.data[0][i]" required name="value{{i}}" min="0" max="10">
         </mat-form-field>
-        <mat-form-field>
-          <input type="number" matInput placeholder="Value" [(ngModel)]="spoke.value" required name="value{{i}}" min="0" max="10">
-        </mat-form-field>
-        <button mat-icon-button (click)="removeSpoke(data[0],i)" [disabled]="data[0].length===1"><mat-icon><i class="material-icons">remove_circle_outline</i></mat-icon></button>
-        <button mat-icon-button (click)="addSpoke(data[0])"><mat-icon><i class="material-icons">add_circle_outline</i></mat-icon></button>
       </div>
     </div>
   </div>
-  <div>
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/PIJElPStJpg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+  <div fxFlex="45">
+    <iframe class="w100" height="316px" src="https://www.youtube.com/embed/PIJElPStJpg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+  </div>
+</div>
+<div class="w100 h100" fxLayout="row" fxLayoutAlign="center start" *ngIf="currentState === 3">
+  <div class="h100" FxFlex="55">
+    <p>
+      It's now time to score each of your blocks on a scale of 1-10. For each block, ask yourself the question:  “How satisfied am I in this particular area currently”?
+    </p>
+    <div>
+      <div *ngFor="let block of wof.blocks;let i = index" fxLayout="row" fxLayoutAlign="center start">
+        <span fxFlex="65">{{block}}</span>
+        <mat-form-field fxFlex>
+          <input type="number" matInput placeholder="Value" [(ngModel)]="wof.data[1][i]" required name="value{{i}}" min="0" max="10">
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  <div fxFlex="45">
+    <iframe class="w100" height="316px" src="https://www.youtube.com/embed/PIJElPStJpg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
   </div>
 </div>

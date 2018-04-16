@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { ExerciseRoutingModule } from './exercise-routing.module';
 import { GraphService } from "./wheeloflife/graph.service";
 import { Page1Component } from './wheeloflife/page1/page1.component';
-
+import { WofService } from "./wheeloflife/wof.service";
 
 @NgModule({
   imports: [
@@ -15,7 +15,8 @@ import { Page1Component } from './wheeloflife/page1/page1.component';
   ],
   declarations: [],
   providers: [
-    GraphService
+    GraphService,
+    WofService
   ],
   exports: []
 })

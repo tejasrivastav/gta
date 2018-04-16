@@ -13,16 +13,24 @@ import {
 } from "@angular/material";
 
 import { BaseComponent } from "./components/base/base.component";
-
+import { LoginComponent } from "./components/login/login.component";
+import { AuthenticatedGuard } from './authenticated.guard';
+import { UserResolver } from './user.resolver';
 const routes: Routes = [
   { path: '', component: BaseComponent },
+  { path: 'login', component: LoginComponent },
   {
     path: 'exercise',
-    loadChildren: 'app/exercise/exercise.module#ExerciseModule'
+    loadChildren: 'app/exercise/exercise.module#ExerciseModule',
+    canActivate: [AuthenticatedGuard],
+    resolve: {
+      "user": UserResolver
+    }
   },
   {
     path: 'resource',
-    loadChildren: 'app/resources/resources.module#ResourcesModule'
+    loadChildren: 'app/resources/resources.module#ResourcesModule',
+    canActivate: [AuthenticatedGuard]
   }
 ]
 
@@ -42,6 +50,7 @@ const routes: Routes = [
     MatButtonModule,
     MatIconModule
   ],
-  exports: [ RouterModule ]
+  exports: [ RouterModule ],
+  providers: [UserResolver]
 })
 export class AppRoutingModule { }

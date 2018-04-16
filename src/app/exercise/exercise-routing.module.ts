@@ -21,6 +21,11 @@ const routes: Routes = [
     component: WheeloflifeComponent,
     children: [
       {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: '1'
+      },
+      {
         path: '1',
         component: Page1Component
       }
