@@ -1,5 +1,5 @@
-<div class="w100 h100">
-  <mat-card>
+<div class="h100">
+  <mat-card *ngIf="show===1">
     <form role="form" (submit)="login(user)"><br>
       <mat-form-field>
         <input matInput type="text" required [(ngModel)]="user.username" id="username" name="username" >
@@ -14,7 +14,38 @@
         </mat-placeholder>
       </mat-form-field><br><br>
       <button mat-raised-button color="warn" type="submit" name="action">LOGIN</button><br><br>
+      <button mat-raised-button color="primary" name="signup" (click)="show=2">Sign UP</button><br><br>
       <span id="err"><small>{{errorMsg}}</small></span>
-    </form >
+    </form>
+  </mat-card>
+  <mat-card *ngIf="show===2">
+    <form role="form" (submit)="signup(user)"><br>
+      <mat-form-field>
+        <input matInput type="text" required [(ngModel)]="user.firstname" id="firstname" name="firstname" >
+        <mat-placeholder>
+          <i class="material-icons app-input-icon">face</i>firstname
+        </mat-placeholder>
+      </mat-form-field><br><br>
+      <mat-form-field>
+        <input matInput type="text" required [(ngModel)]="user.lastname" id="lastname" name="lastname" >
+        <mat-placeholder>
+          <i class="material-icons app-input-icon">face</i>lastname
+        </mat-placeholder>
+      </mat-form-field><br><br>
+      <mat-form-field>
+        <input matInput type="text" required [(ngModel)]="user.username" id="username" name="username" >
+        <mat-placeholder>
+          <i class="material-icons app-input-icon">face</i>Username
+        </mat-placeholder>
+      </mat-form-field><br><br>
+      <mat-form-field>
+        <input matInput type="password" required [(ngModel)]="user.password" id="password" name="password" >
+        <mat-placeholder >
+          <i class="material-icons app-input-icon">lock_open</i>Password
+        </mat-placeholder>
+      </mat-form-field><br><br>
+      <button mat-raised-button color="warn" type="submit" name="action">Create</button><br><br>
+      <span id="err"><small>{{errorMsg}}</small></span>
+    </form>
   </mat-card>
 </div>

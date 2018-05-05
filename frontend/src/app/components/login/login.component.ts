@@ -9,9 +9,12 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   user: any = {
-    "username": "admin@example.com",
-    "password": "Password1",
+    "firstname": null,
+    "lastname": null,
+    "username": null,
+    "password": null
   };
+  show = 1;
   errorMsg: String;
   constructor(
     private authService: AuthenticateService,
@@ -29,12 +32,17 @@ export class LoginComponent implements OnInit {
     })
     .catch((error)=>{
       if(error.status === 401) {
-        this.authService.createAccount(user)
-        .toPromise()
-        .then((data)=>{
-          self.login(user);
-        })
+        
       }
     })
+  }
+
+  signup(user){
+    let self = this;
+    this.authService.createAccount(user)
+      .toPromise()
+      .then((data)=>{
+        self.login(user);
+      })
   }
 }
