@@ -22,7 +22,11 @@ export class Page1Component implements OnInit {
     id: null,
     userId: null,
     blocks: [],
-    data: [[],[]]
+    data: [[],[]],
+    version: 1,
+    createdDate: null,
+    status: "PENDING",
+    currentState: 0
   }
   
   data = [[{axis:"",value:0}],[]];
@@ -46,17 +50,24 @@ export class Page1Component implements OnInit {
   }
 
   textUpdated(event,idx){
-    console.log(event);
     this.wof.blocks[idx] = event.target.value;
   }
 
   save(){
-    if(this.wof.data[0].length === 0){
-      this.wof.data[0] = this.wof.blocks.map(block=> null);
+    if(this.wof.blocks.length > 0 && this.currentState !== 0){
+      if(this.wof.data[0].length === 0){
+        this.wof.data[0] = this.wof.blocks.map(block=> null);
+      }
+      if(this.wof.data[1].length === 0){
+        this.wof.data[1] = this.wof.blocks.map(block=>null);
+      }
+    } else {
+      this.wof.data = null;
     }
-    if(this.wof.data[1].length === 0){
-      this.wof.data[1] = this.wof.blocks.map(block=>null);
+    if(this.currentState === 3) {
+      this.wof.status = "DONE";
     }
+    this.wof.currentState++;
     this.wofService.save(this.wof)
     .subscribe((wof: any)=>{
       if(wof.data&&wof.data[0].length === 0){
@@ -71,6 +82,8 @@ export class Page1Component implements OnInit {
   }
 
   init(data){
+    document.getElementsByClassName("radarChart2").item(0).parentElement.style.display="none";
+    document.getElementsByClassName("radarChart1").item(0).parentElement.style.display="none";
     this.wof = Object.assign(this.wof,data);
     if(!this.wof.userId) {
       this.wof.userId = this.user.id
@@ -79,18 +92,26 @@ export class Page1Component implements OnInit {
       this.wof.data = [[],[]];
     }
     console.log(this.currentState);
-    let stage1 = this.wof.data[0].filter(val=>val!==null);
-    let stage2 = this.wof.data[1].filter(val=>val!==null);
-    if(this.wof.blocks.length === 0) {
-      this.currentState = 0;
-      this.wof.blocks.push("");
-    } else if(stage1.length !== this.wof.blocks.length) {
-      this.currentState = 1;
-    } else if(stage2.length !== this.wof.blocks.length) {
-      this.currentState = 3;
-    } else {
-      this.currentState = 4;
-      this.phasetwo(this.wof);
+    if(!this.wof.currentState){
+      this.wof.currentState = 0
+    }
+    this.currentState = this.wof.currentState;
+    switch (this.currentState) {
+      case 0:
+        if(this.wof.blocks.length === 0){
+          this.wof.blocks.push("");
+        }
+        break;
+      case 2:
+        document.getElementsByClassName("radarChart1").item(0).parentElement.style.display="flex";
+        this.phaseone(this.wof)
+        break;
+      case 4:
+        document.getElementsByClassName("radarChart2").item(0).parentElement.style.display="flex";
+        this.phasetwo(this.wof);
+        break;
+      default:
+        break;
     }
     console.log(this.wof)
   }
@@ -163,5 +184,37 @@ export class Page1Component implements OnInit {
       return {axis: value,value: wof.data[1][idx]}
     });
     return data;
+  }
+
+  back(){
+    try {
+      if((this.currentState%2) === 0){
+        document.getElementsByClassName("radarChart2").item(0).parentElement.style.display="none";
+        document.getElementsByClassName("radarChart1").item(0).parentElement.style.display="none";
+      } else {
+        // document.getElementsByClassName("radarChart2").item(0).parentElement.style.display="flex";
+        // document.getElementsByClassName("radarChart1").item(0).parentElement.style.display="flex";
+        if(this.currentState === 3) {
+          document.getElementsByClassName("radarChart1").item(0).parentElement.style.display="flex";
+          // setTimeout(function(){
+          //   this.phaseone(this.wof);
+          // },100);
+        }
+      }
+    } catch {}
+    this.wof.currentState--;
+    this.init(this.wof);
+  }
+
+  revise(){
+    let wof = this.wof;
+    wof.id = null;
+    wof.data = [[],[]];
+    wof.createdDate = null;
+    wof.version++;
+    wof.currentState=0;
+    wof.status = "PENDING";
+    this.wof = wof;
+    this.save();
   }
 }
