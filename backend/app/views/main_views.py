@@ -1,6 +1,7 @@
 
 from flask import Blueprint
 from flask import request, url_for, g, jsonify, abort
+from datetime import datetime
 
 from app import db
 from app import auth
@@ -83,8 +84,11 @@ def parse_request():
     userId = request.json.get('userId')
     blocks= request.json.get('blocks')
     data= request.json.get('data')
+    currentState= request.json.get('currentState')
+    status= request.json.get('status')
+    version= request.json.get('version')
     if request.method == 'POST':
-        wof = Wheeloflife(userId=userId,blocks=blocks)
+        wof = Wheeloflife(userId=userId,blocks=blocks,version=version,status="PENDING",createdDate= datetime.now(),currentState= currentState)
         db.session.add(wof)
         db.session.commit()
         return jsonify(wof.to_json())
@@ -92,6 +96,9 @@ def parse_request():
         wof = Wheeloflife.query.filter_by(id=id).first()
         wof.blocks=blocks
         wof.data=data
+        wof.currentState = currentState
+        wof.status = status
+        wof.version = version
         db.session.add(wof)
         db.session.commit()
         return jsonify(wof.to_json())
