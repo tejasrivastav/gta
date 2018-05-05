@@ -30,11 +30,13 @@ def verify_password(username_or_token, password):
 def new_user():
     username = request.json.get('username')
     password = request.json.get('password')
+    lastname = request.json.get('lastname')
+    firstname = request.json.get('firstname')
     if username is None or password is None:
         abort(400)    # missing arguments
     if User.query.filter_by(username=username).first() is not None:
         abort(400)    # existing user
-    user = User(username=username)
+    user = User(username=username,lastname=lastname,firstname=firstname)
     user.hash_password(password)
     db.session.add(user)
     db.session.commit()
@@ -51,7 +53,7 @@ def get_user(id):
     print(user)
     if not user:
         abort(400)
-    return jsonify({'username': user.username})
+    return jsonify({'id':g.user.id,'lastname': g.user.lastname,'firstname': g.user.firstname})
 
 
 @main_blueprint.route('/api/token')
@@ -69,7 +71,7 @@ def get_resource():
 @main_blueprint.route('/api/user')
 @auth.login_required
 def get_user_data():
-    return jsonify({'id':g.user.id})
+    return jsonify({'id':g.user.id,'lastname': g.user.lastname,'firstname': g.user.firstname})
 
 @main_blueprint.route('/api/wheeloflife', methods=['POST','GET','PUT'])
 def parse_request():

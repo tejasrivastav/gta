@@ -8,6 +8,8 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(32), index=True)
     password_hash = db.Column(db.String(64))
+    lastname = db.Column(db.String(32))
+    firstname = db.Column(db.String(32))
 
     def hash_password(self, password):
         self.password_hash = pwd_context.encrypt(password)
