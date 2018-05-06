@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
+import { BaseService } from './base.service';
 
 @Component({
   selector: 'app-base',
@@ -8,14 +9,17 @@ import { HttpClient } from "@angular/common/http";
 })
 export class BaseComponent implements OnInit {
   quote: any;
+  content: any;
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private baseService: BaseService
   ) { }
 
   ngOnInit() {
-    // this.quote = 
-    this.http.get("https://talaikis.com/api/quotes/random/")
-    .subscribe(data=>{this.quote = data})
+    this.baseService.getContent()
+    .subscribe((data)=>{
+      this.content=data
+    })
   }
 
 }

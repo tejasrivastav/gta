@@ -16,6 +16,7 @@ import { BaseComponent } from "./components/base/base.component";
 import { LoginComponent } from "./components/login/login.component";
 import { AuthenticatedGuard } from './authenticated.guard';
 import { UserResolver } from './user.resolver';
+import { BaseService } from './components/base/base.service';
 const routes: Routes = [
   { path: '', component: BaseComponent, canActivate: [AuthenticatedGuard] },
   { path: 'login', component: LoginComponent },
@@ -51,6 +52,9 @@ const routes: Routes = [
     MatIconModule
   ],
   exports: [ RouterModule ],
-  providers: [UserResolver]
+  providers: [
+    UserResolver,
+    BaseService
+  ]
 })
 export class AppRoutingModule { }
