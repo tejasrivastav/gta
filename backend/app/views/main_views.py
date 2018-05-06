@@ -7,6 +7,7 @@ from app import db
 from app import auth
 from app.models.user_models import User
 from app.models.wof_models import Wheeloflife
+from app.models.content_models import Content
 
 main_blueprint = Blueprint('main', __name__, template_folder='templates')
 
@@ -104,3 +105,16 @@ def parse_request():
         db.session.add(wof)
         db.session.commit()
         return jsonify(wof.to_json())
+
+@main_blueprint.route('/api/content', methods=['POST','GET','PUT'])
+def get_content():
+    if request.method == 'GET':
+        content = Content.query.all()
+        print(content)
+        if content is not None:
+            my_list = []
+            for i in content:
+                my_list.append(i.to_json())
+            return jsonify(my_list)
+        else:
+            return jsonify(None)

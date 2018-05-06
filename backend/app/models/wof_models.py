@@ -1,6 +1,5 @@
 from app import db
 from sqlalchemy.dialects import postgresql
-import enum
 
 class Wheeloflife(db.Model):
     __tablename__ = 'wheeloflife'
