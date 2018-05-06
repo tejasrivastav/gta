@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { BaseService } from './base.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-base',
@@ -12,7 +13,8 @@ export class BaseComponent implements OnInit {
   content: any;
   constructor(
     private http: HttpClient,
-    private baseService: BaseService
+    private baseService: BaseService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -22,4 +24,7 @@ export class BaseComponent implements OnInit {
     })
   }
 
+  startExercise(url){
+    this.router.navigate([url]);
+  }
 }

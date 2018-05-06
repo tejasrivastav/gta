@@ -40,7 +40,13 @@ def new_user():
     user = User(username=username,lastname=lastname,firstname=firstname)
     user.hash_password(password)
     db.session.add(user)
-    db.session.commit()
+    try:
+        db.session.commit()
+    except:
+        db.session.rollback()
+        raise
+    finally:
+        db.session.close() 
     return (jsonify({'username': user.username}), 201,
             {'Location': url_for('main.get_user', id=user.id, _external=True)})
 
@@ -93,7 +99,13 @@ def parse_request():
     if request.method == 'POST':
         wof = Wheeloflife(userId=userId,blocks=blocks,version=version,status="PENDING",createdDate= datetime.now(),currentState= currentState)
         db.session.add(wof)
-        db.session.commit()
+        try:
+            db.session.commit()
+        except:
+            db.session.rollback()
+            raise
+        finally:
+            db.session.close()
         return jsonify(wof.to_json())
     if request.method == 'PUT':
         wof = Wheeloflife.query.filter_by(id=id).first()
@@ -103,7 +115,13 @@ def parse_request():
         wof.status = status
         wof.version = version
         db.session.add(wof)
-        db.session.commit()
+        try:
+            db.session.commit()
+        except:
+            db.session.rollback()
+            raise
+        finally:
+            db.session.close()
         return jsonify(wof.to_json())
 
 @main_blueprint.route('/api/content', methods=['POST','GET','PUT'])

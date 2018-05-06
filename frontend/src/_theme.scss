@@ -1,0 +1,96 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import '~@angular/material/theming';
+
+// #6AC9D2;
+// #FAAD55;
+// Define a custom typography config that overrides the font-family
+$custom-typography: mat-typography-config(
+  $font-family: 'Overpass, monospace, sans-serif'
+);
+
+@include mat-core();
+$app-primary: (
+    50 : #edf9fa,
+    100 : #d2eff2,
+    200 : #b5e4e9,
+    300 : #97d9e0,
+    400 : #80d1d9,
+    500 : #6ac9d2,
+    600 : #62c3cd,
+    700 : #57bcc7,
+    800 : #4db5c1,
+    900 : #3ca9b6,
+    A100 : #ffffff,
+    A200 : #d1faff,
+    A400 : #9ef4ff,
+    A700 : #85f2ff,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #000000,
+        800 : #000000,
+        900 : #000000,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$app-accent: (
+    50 : #fef5eb,
+    100 : #fee6cc,
+    200 : #fdd6aa,
+    300 : #fcc688,
+    400 : #fbb96f,
+    500 : #faad55,
+    600 : #f9a64e,
+    700 : #f99c44,
+    800 : #f8933b,
+    900 : #f6832a,
+    A100 : #ffffff,
+    A200 : #ffffff,
+    A400 : #ffe2cf,
+    A700 : #ffd3b5,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #000000,
+        800 : #000000,
+        900 : #000000,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://www.google.com/design/spec/style/color.html
+$candy-app-primary: mat-palette($app-primary);
+$candy-app-accent:  mat-palette($app-accent, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$candy-app-warn:    mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-app-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($candy-app-theme);
+@include angular-material-typography($custom-typography);

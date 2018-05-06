@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
     let self = this;
     this.authService.login(user)
     .then((data)=>{
-      this.router.navigate(["exercise/wheeloflife"])
+      this.router.navigate(["/"])
     })
     .catch((error)=>{
       if(error.status === 401) {

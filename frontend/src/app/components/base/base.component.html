@@ -12,11 +12,11 @@
                     <mat-card-content>
                         <h2>{{card.title}}</h2>
                         <p>{{card.description}}</p>
+                        <p>Estimated Time: {{card.estimated_time}} minutes</p>
                     </mat-card-content>
                     <mat-card-actions>
-                        <p>
-                        Estimated Time: 30 minutes
-                        </p>
+                            <button mat-raised-button color="primary" *ngIf="card.content_type==='Exercise'" (click)="startExercise(card.redirection_url)">Start</button>
+                            <a mat-raised-button color="primary" *ngIf="card.content_type==='Article'" [href]="card.redirection_url" target="_blank">Read</a>
                     </mat-card-actions>
                 </mat-card>
             </div>
