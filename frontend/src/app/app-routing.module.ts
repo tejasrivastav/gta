@@ -18,7 +18,7 @@ import { AuthenticatedGuard } from './authenticated.guard';
 import { UserResolver } from './user.resolver';
 import { BaseService } from './components/base/base.service';
 const routes: Routes = [
-  { path: '', component: BaseComponent, canActivate: [AuthenticatedGuard] },
+  { path: '', component: BaseComponent},
   { path: 'login', component: LoginComponent },
   {
     path: 'exercise',

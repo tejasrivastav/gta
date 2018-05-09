@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MediaChange, ObservableMedia } from '@angular/flex-layout';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,10 @@ export class AppComponent {
   activeMediaQuery;
   mode: String = "side";
   opened: boolean = false;
-  constructor(private media: ObservableMedia) { }
+  constructor(
+    private media: ObservableMedia,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     let self = this;
@@ -24,5 +28,10 @@ export class AppComponent {
         self.opened = false;
       }
     });
+  }
+
+  logout(){
+    window.localStorage.clear();
+    this.router.navigate(["/login"]);
   }
 }

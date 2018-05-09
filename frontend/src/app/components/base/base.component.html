@@ -1,18 +1,18 @@
 <div class="w100 h100" fxLayout="row" fxLayoutAlign="center center">
     <div class="h100" style="text-align: center">
-        <img src="https://static.wixstatic.com/media/f02fdb_28b8775ba3e44f7295ee81dd8c63db51~mv2.png" style="height: 200px;">
-        <p>
-            <span class="color_12">The BEST&nbsp;global content and resources curated for YOU.</span>
-            <span class="color_12">For your SELF-ACTUALIZATION adventures</span>  
-        </p>
-        <div style="padding: 16px;" fxLayout="row" fxLayoutWrap>
-            <div *ngFor="let card of content" style="max-width: 25%;margin: 0 16px 16px 0;">
+        <img src="https://static.wixstatic.com/media/f02fdb_28b8775ba3e44f7295ee81dd8c63db51~mv2.png" style="height: 200px;margin-bottom: 16px;">
+        <div>
+            <div>The BEST&nbsp;global content and resources curated for YOU.</div>
+            <div>For your SELF-ACTUALIZATION adventures</div>  
+        </div>
+        <div style="padding: 16px;" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="center center" fxLayoutWrap>
+            <div *ngFor="let card of content" style="margin: 0 16px 16px 0;max-width: 300px;">
                 <mat-card class="example-card"> 
-                    <img mat-card-image [src]="card.img_thumbnail">
+                    <img mat-card-image [src]="card.img_thumbnail" style="max-width: 300px;">
                     <mat-card-content>
                         <h2>{{card.title}}</h2>
-                        <p>{{card.description}}</p>
-                        <p>Estimated Time: {{card.estimated_time}} minutes</p>
+                        <p style="text-align: center;">{{card.description}}</p>
+                        <p style="text-align: center;">Estimated Time: {{card.estimated_time}} minutes</p>
                     </mat-card-content>
                     <mat-card-actions>
                             <button mat-raised-button color="primary" *ngIf="card.content_type==='Exercise'" (click)="startExercise(card.redirection_url)">Start</button>

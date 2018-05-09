@@ -1,5 +1,5 @@
-<div class="w100 h100" fxLayout="row" fxLayoutAlign="center start" *ngIf="currentState === 0">
-  <div class="h100" FxFlex="55">
+<div class="w100 h100" fxLayout="row" fxLayoutAlign="center start" *ngIf="currentState === 0" fxLayout.lt-md="column">
+  <div class="h100" FxFlex="55" fxFlexOrder.lt-md="2">
     <p>
       <strong style="text-transform: capitalize;">{{user.firstname}}</strong>, the exercise begins with understanding your building blocks. Your building blocks will form the spokes in your wheel of life.<br />
       Once you're ready fill out your building blocks below. We recommended a minimum of 6 and maximum of 10.
@@ -16,12 +16,12 @@
       </form>
     </div>
   </div>
-  <div fxFlex="45">
+  <div fxFlex="45" fxFlexOrder.lt-md="1">
     <iframe class="w100" height="316px" src="https://www.youtube.com/embed/PIJElPStJpg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
   </div>
 </div>
-<div class="w100 h100" fxLayout="row" fxLayoutAlign="center start" *ngIf="currentState === 1">
-  <div class="h100" FxFlex="55">
+<div class="w100 h100" fxLayout="row" fxLayoutAlign="center start" *ngIf="currentState === 1" fxLayout.lt-md="column">
+  <div class="h100" FxFlex="55" fxFlexOrder.lt-md="2">
     <p>
       It's now time to score each of your blocks on a scale of 1-10. For each block, ask yourself the question:  “How satisfied am I in this particular area currently”?
     </p>
@@ -34,15 +34,15 @@
       </div>
     </div>
   </div>
-  <div fxFlex="45">
+  <div fxFlex="45" fxFlexOrder.lt-md="1">
     <iframe class="w100" height="316px" src="https://www.youtube.com/embed/PIJElPStJpg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
   </div>
 </div>
 <div class="w100 h100" fxLayout="row" fxLayoutAlign="center start" [hidden]="currentState !== 2">
   <div class="radarChart1 w100 h100" style="min-height: 350px;" #radarChart1></div>
 </div>
-<div class="w100 h100" fxLayout="row" fxLayoutAlign="center start" *ngIf="currentState === 3">
-  <div class="h100" FxFlex="55">
+<div class="w100 h100" fxLayout="row" fxLayoutAlign="center start" *ngIf="currentState === 3" fxLayout.lt-md="column">
+  <div class="h100" FxFlex="55" fxFlexOrder.lt-md="2" style="overflow: auto;">
     <p>
       It's now time to score each of your blocks on a scale of 1-10. For each block, ask yourself the question:  “How satisfied am I in this particular area currently”?
     </p>
@@ -55,8 +55,8 @@
       </div>
     </div>
   </div>
-  <div fxFlex="45">
-    <iframe class="w100" height="316px" src="https://www.youtube.com/embed/PIJElPStJpg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+  <div fxFlex="45" fxFlex.lt-md="25" fxFlexOrder.lt-md="1">
+    <iframe class="w100" height="100%" max-height="316px;" src="https://www.youtube.com/embed/PIJElPStJpg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
   </div>
 </div>
 <div class="w100 h100" fxLayout="row" fxLayoutAlign="center start" [hidden]="currentState !== 4">
